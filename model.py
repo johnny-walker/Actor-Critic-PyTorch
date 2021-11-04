@@ -45,7 +45,7 @@ class ActorCritic(nn.Module):
         
         loss = 0
         for logprob, value, reward in zip(self.logprobs, self.state_values, rewards):
-            advantage = reward  - value.item()
+            advantage = reward - value.item()
             action_loss = -logprob * advantage
             value_loss = F.smooth_l1_loss(value, reward)
             loss += (action_loss + value_loss)   
